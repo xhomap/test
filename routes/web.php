@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
+
+Route::get('/', ['as' => 'user.index', 'uses' => 'UserController@index']);
+Route::get('/{user}-{name}')->name('user.edit')->uses('UserController@edit');
+Route::patch('{user}', ['as' => 'user.update', 'uses' => 'UserController@update']);
+Route::get('create', ['as' => 'user.create', 'uses' => 'UserController@create']);
+Route::post('create', ['as' => 'user.store', 'uses' => 'UserController@store']);
+Route::get('{user}/delete', ['as' => 'user.delete', 'uses' => 'UserController@delete']);
